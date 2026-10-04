@@ -188,7 +188,6 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/reviewsMenu"
         android:orientation="vertical"
         android:gravity="center"
         android:foreground="?android:selectableItemBackground"
