@@ -13,7 +13,6 @@ import com.zen.alchan.data.response.anilist.User
 import com.zen.alchan.databinding.LayoutHomeHeaderBinding
 import com.zen.alchan.databinding.LayoutHomeMenuBinding
 import com.zen.alchan.databinding.LayoutHomeReleasingTodayBinding
-import com.zen.alchan.databinding.LayoutHomeSocialBinding
 import com.zen.alchan.databinding.LayoutHomeTrendingBinding
 import com.zen.alchan.helper.extensions.clicks
 import com.zen.alchan.helper.extensions.show
