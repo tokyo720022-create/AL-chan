@@ -234,8 +234,9 @@
         <item name="themeSecondaryColor">@color/white</item>
         <item name="themeSecondaryTransparent50Color">@color/whiteTransparent50</item>
         <item name="themeSecondaryTransparent20Color">@color/whiteTransparent36</item>
-        <item name="themeNegativeColor">@color/anilistBrightRed</item>
-        <item name="themeNegativeTransparent50Color">@color/anilistBrightRedTransparent50</item>
+        <item name="themeNegativeColor">@color/tokyoRed</item>
+        <item name="themeNegativeTransparent50Color">@color/tokyoRedTransparent50</item>
+        <item name="colorAccent">@color/tokyoNeon</item>
     </style>
 
     <!-- AniList Light Theme -->

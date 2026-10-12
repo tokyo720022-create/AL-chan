@@ -110,10 +110,20 @@ class HomeRvAdapter(
     }
 
     inner class ReleasingTodayViewHolder(private val binding: LayoutHomeReleasingTodayBinding) : ViewHolder(binding) {
+        private var releasingAdapter: ReleasingTodayRvAdapter? = null
+
         override fun bind(item: HomeItem, index: Int) {
             with(binding) {
                 if (item.releasingToday.isNotEmpty()) {
-                    releasingTodayRecyclerView.adapter = ReleasingTodayRvAdapter(context, item.releasingToday, appSetting, listener.releasingTodayListener)
+                    val existingAdapter = releasingAdapter
+                    if (existingAdapter == null) {
+                        ReleasingTodayRvAdapter(context, item.releasingToday, appSetting, listener.releasingTodayListener).also {
+                            releasingAdapter = it
+                            releasingTodayRecyclerView.adapter = it
+                        }
+                    } else {
+                        existingAdapter.updateData(item.releasingToday)
+                    }
                     releasingTodayRecyclerView.show(true)
                     releasingTodayEmptyText.show(false)
                 } else {
@@ -125,10 +135,20 @@ class HomeRvAdapter(
     }
 
     inner class ContinueWatchingViewHolder(private val binding: LayoutHomeContinueWatchingBinding) : ViewHolder(binding) {
+        private var continueWatchingAdapter: ContinueWatchingRvAdapter? = null
+
         override fun bind(item: HomeItem, index: Int) {
             with(binding) {
                 if (item.continueWatching.isNotEmpty()) {
-                    continueWatchingRecyclerView.adapter = ContinueWatchingRvAdapter(context, item.continueWatching, appSetting, listener.releasingTodayListener)
+                    val existingAdapter = continueWatchingAdapter
+                    if (existingAdapter == null) {
+                        ContinueWatchingRvAdapter(context, item.continueWatching, appSetting, listener.releasingTodayListener).also {
+                            continueWatchingAdapter = it
+                            continueWatchingRecyclerView.adapter = it
+                        }
+                    } else {
+                        existingAdapter.updateData(item.continueWatching)
+                    }
                     continueWatchingRecyclerView.show(true)
                     continueWatchingEmptyText.show(false)
                 } else {
@@ -149,6 +169,8 @@ class HomeRvAdapter(
     }
 
     inner class TrendingMediaViewHolder(private val binding: LayoutHomeTrendingBinding) : ViewHolder(binding) {
+        private var trendingAdapter: TrendingMediaRvAdapter? = null
+
         override fun bind(item: HomeItem, index: Int) {
             binding.apply {
                 trendingRightNowText.text = when (item.viewType) {
@@ -158,7 +180,15 @@ class HomeRvAdapter(
                 }
 
                 if (item.media.isNotEmpty()) {
-                    trendingListRecyclerView.adapter = TrendingMediaRvAdapter(context, item.media, appSetting, width, listener.trendingMediaListener)
+                    val existingAdapter = trendingAdapter
+                    if (existingAdapter == null) {
+                        TrendingMediaRvAdapter(context, item.media, appSetting, width, listener.trendingMediaListener).also {
+                            trendingAdapter = it
+                            trendingListRecyclerView.adapter = it
+                        }
+                    } else {
+                        existingAdapter.updateData(item.media)
+                    }
                     trendingProgressBar.show(false)
                 } else {
                     trendingProgressBar.show(true)

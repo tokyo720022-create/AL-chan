@@ -148,8 +148,10 @@ class HomeViewModel(
                                             currentHomeList.removeAt(releasingTodayIndex)
                                         }
                                         val menuIndex = currentHomeList.indexOfFirst { it.viewType == HomeItem.VIEW_TYPE_MENU }
+                                        val continueWatchingIndex = currentHomeList.indexOfFirst { it.viewType == HomeItem.VIEW_TYPE_CONTINUE_WATCHING }
                                         if (menuIndex != -1 && homeAppSetting.showHomeReleasingToday != false) {
-                                            currentHomeList.add(menuIndex + 1, HomeItem(releasingToday = it, viewType = HomeItem.VIEW_TYPE_RELEASING_TODAY))
+                                            val insertIndex = if (continueWatchingIndex != -1) continueWatchingIndex + 1 else menuIndex + 1
+                                            currentHomeList.add(insertIndex.coerceAtMost(currentHomeList.size), HomeItem(releasingToday = it, viewType = HomeItem.VIEW_TYPE_RELEASING_TODAY))
                                         }
                                         _homeItemList.onNext(currentHomeList)
                                     },
@@ -231,8 +233,8 @@ class HomeViewModel(
         )
         val otherItems = existingItems.filterNot { it.viewType in knownSections }
         val nextItems = mutableListOf(header, menu)
-        if (homeAppSetting.showHomeReleasingToday != false) nextItems.add(releasing)
         if (homeAppSetting.showHomeContinueWatching != false) nextItems.add(continuing)
+        if (homeAppSetting.showHomeReleasingToday != false) nextItems.add(releasing)
         if (homeAppSetting.showHomeTrendingAnime != false) nextItems.add(trendingAnime)
         if (homeAppSetting.showHomeTrendingManga != false) nextItems.add(trendingManga)
         nextItems.addAll(otherItems)
@@ -264,11 +266,11 @@ class HomeViewModel(
                 HomeItem(viewType = HomeItem.VIEW_TYPE_HEADER),
                 HomeItem(viewType = HomeItem.VIEW_TYPE_MENU)
             )
-            if (homeAppSetting.showHomeReleasingToday != false) {
-                initialItems.add(HomeItem(viewType = HomeItem.VIEW_TYPE_RELEASING_TODAY))
-            }
             if (homeAppSetting.showHomeContinueWatching != false) {
                 initialItems.add(HomeItem(viewType = HomeItem.VIEW_TYPE_CONTINUE_WATCHING))
+            }
+            if (homeAppSetting.showHomeReleasingToday != false) {
+                initialItems.add(HomeItem(viewType = HomeItem.VIEW_TYPE_RELEASING_TODAY))
             }
             if (homeAppSetting.showHomeTrendingAnime != false) {
                 initialItems.add(HomeItem(viewType = HomeItem.VIEW_TYPE_TRENDING_ANIME))
@@ -336,7 +338,7 @@ class HomeViewModel(
                     collection.lists.flatMap { group -> group.entries }
                         .filter { it.status == MediaListStatus.CURRENT || it.status == MediaListStatus.REPEATING }
                         .sortedByDescending { it.updatedAt }
-                        .take(12)
+                        .take(6)
                 }
                 .applyScheduler()
                 .subscribe(
@@ -352,8 +354,7 @@ class HomeViewModel(
                         } else {
                             val menuIndex = currentHomeList.indexOfFirst { it.viewType == HomeItem.VIEW_TYPE_MENU }
                             if (menuIndex == -1) return@subscribe
-                            val releasingIndex = currentHomeList.indexOfFirst { it.viewType == HomeItem.VIEW_TYPE_RELEASING_TODAY }
-                            val insertIndex = if (releasingIndex != -1) releasingIndex + 1 else menuIndex + 1
+                            val insertIndex = menuIndex + 1
                             currentHomeList.add(insertIndex.coerceAtMost(currentHomeList.size), continueWatchingItem)
                         }
                         _homeItemList.onNext(currentHomeList)
@@ -419,7 +420,7 @@ class HomeViewModel(
             nextEntries.removeAt(matchIndex)
         }
 
-        val sortedEntries = nextEntries.sortedByDescending { it.updatedAt }.take(12)
+        val sortedEntries = nextEntries.sortedByDescending { it.updatedAt }.take(6)
         currentHomeList[itemIndex] = currentHomeList[itemIndex].copy(continueWatching = sortedEntries)
         _homeItemList.onNext(currentHomeList)
     }
