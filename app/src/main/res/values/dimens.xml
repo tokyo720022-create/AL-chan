@@ -12,6 +12,8 @@
     <dimen name="imageCircleSmallSize">75dp</dimen>
     <dimen name="imageCircleSize">100dp</dimen>
 
+    <dimen name="homeHeaderTopMargin">140dp</dimen>
+    <dimen name="homeHeaderTopMarginCompact">68dp</dimen>
     <dimen name="marginPageNormal">16dp</dimen>
     <dimen name="marginPageBig">28dp</dimen>
 

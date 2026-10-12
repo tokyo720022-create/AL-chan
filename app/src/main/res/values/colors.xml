@@ -79,6 +79,8 @@
     <color name="brownTransparent50">#80C7A683</color>
 
     <color name="red">#FDD5B5</color>
+
+    <color name="tokyoRed">#E13333</color>
     <color name="aloevera">#CFFDD0</color>
     <color name="aloeveraTransparent50">#80CFFDD0</color>
     <color name="aloeveraTransparent20">#33CFFDD0</color>

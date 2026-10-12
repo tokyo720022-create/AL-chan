@@ -11,8 +11,10 @@ import com.zen.alchan.data.entity.AppSetting
 import com.zen.alchan.data.response.anilist.Media
 import com.zen.alchan.data.response.anilist.User
 import com.zen.alchan.databinding.LayoutHomeHeaderBinding
+import com.zen.alchan.databinding.LayoutHomeContinueWatchingBinding
 import com.zen.alchan.databinding.LayoutHomeMenuBinding
 import com.zen.alchan.databinding.LayoutHomeReleasingTodayBinding
+import com.zen.alchan.databinding.LayoutHomeSocialBinding
 import com.zen.alchan.databinding.LayoutHomeTrendingBinding
 import com.zen.alchan.helper.extensions.clicks
 import com.zen.alchan.helper.extensions.show
@@ -44,6 +46,10 @@ class HomeRvAdapter(
                 val view = LayoutHomeReleasingTodayBinding.inflate(inflater, parent, false)
                 return ReleasingTodayViewHolder(view)
             }
+            HomeItem.VIEW_TYPE_CONTINUE_WATCHING -> {
+                val view = LayoutHomeContinueWatchingBinding.inflate(inflater, parent, false)
+                return ContinueWatchingViewHolder(view)
+            }
             HomeItem.VIEW_TYPE_SOCIAL -> {
                 val view = LayoutHomeSocialBinding.inflate(inflater, parent, false)
                 return SocialViewHolder(view)
@@ -66,6 +72,12 @@ class HomeRvAdapter(
     inner class HeaderViewHolder(private val binding: LayoutHomeHeaderBinding) : ViewHolder(binding) {
         override fun bind(item: HomeItem, index: Int) {
             binding.apply {
+                val headerParams = welcomeText.layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
+                headerParams.topMargin = context.resources.getDimensionPixelSize(
+                    if (appSetting.useCompactHomeLayout != false) R.dimen.homeHeaderTopMarginCompact else R.dimen.homeHeaderTopMargin
+                )
+                welcomeText.layoutParams = headerParams
+
                 if (user?.bannerImage?.isNotBlank() == true)
                     ImageUtil.loadImage(context, user.bannerImage, headerImage)
 
@@ -92,7 +104,6 @@ class HomeRvAdapter(
             binding.apply {
                 seasonalMenu.clicks { listener.menuListener.navigateToSeasonal() }
                 exploreMenu.clicks { listener.menuListener.showExploreDialog() }
-                reviewsMenu.clicks { listener.menuListener.navigateToReview() }
                 calendarMenu.clicks { listener.menuListener.navigateToCalendar() }
             }
         }
@@ -108,6 +119,21 @@ class HomeRvAdapter(
                 } else {
                     releasingTodayRecyclerView.show(false)
                     releasingTodayEmptyText.show(true)
+                }
+            }
+        }
+    }
+
+    inner class ContinueWatchingViewHolder(private val binding: LayoutHomeContinueWatchingBinding) : ViewHolder(binding) {
+        override fun bind(item: HomeItem, index: Int) {
+            with(binding) {
+                if (item.continueWatching.isNotEmpty()) {
+                    continueWatchingRecyclerView.adapter = ContinueWatchingRvAdapter(context, item.continueWatching, appSetting, listener.releasingTodayListener)
+                    continueWatchingRecyclerView.show(true)
+                    continueWatchingEmptyText.show(false)
+                } else {
+                    continueWatchingRecyclerView.show(false)
+                    continueWatchingEmptyText.show(true)
                 }
             }
         }

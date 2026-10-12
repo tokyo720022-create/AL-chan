@@ -569,4 +569,13 @@
         <item quantity="one">volume</item>
         <item quantity="other">volumes</item>
     </plurals>
+    <string name="home_screen_customisation">Home Screen</string>
+    <string name="show_releasing_today">Show Releasing Today</string>
+    <string name="show_continue_watching">Show Continue Watching</string>
+    <string name="show_trending_anime">Show Trending Anime</string>
+    <string name="show_trending_manga">Show Trending Manga</string>
+    <string name="use_compact_home_layout">Use Compact Home Header</string>
+    <string name="continue_watching">Continue Watching</string>
+    <string name="continue_watching_next_episode">Up next: Episode %1$d</string>
+    <string name="continue_watching_empty">No anime currently in progress.</string>
 </resources>
