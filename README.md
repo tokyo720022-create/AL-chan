@@ -1,6 +1,7 @@
 
-<h1 align="center">AL-chan</h1>
-<p align="center"><img alt="AL-chan logo" src="https://raw.githubusercontent.com/zend10/AL-chan/master/app/src/main/ic_launcher-web.png" width="30%"></p>
+<p align="center">
+  <img alt="AL-chan — Anime and Manga Tracker" src="docs/images/alchan-tokyo-logo.svg" width="82%" />
+</p>
 
 <p align="center">AL-chan is an unofficial Android client for AniList, a place where you can track, share, discover, and experience Anime and Manga.</p>
 
