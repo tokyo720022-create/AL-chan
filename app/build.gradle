@@ -61,15 +61,15 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.browser:browser:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
+    implementation 'androidx.browser:browser:1.10.0'
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "androidx.window:window:1.1.0"
+    implementation "androidx.window:window:1.5.1"
 
     // Google Material
     implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
 
     // JUnit4 for Instrumentation Test
     androidTestImplementation 'junit:junit:4.13.2'
@@ -144,7 +144,7 @@ dependencies {
     implementation "io.noties.markwon:ext-strikethrough:$markwon_version"
     implementation "io.noties.markwon:inline-parser:$markwon_version"
 
-    def work_version = "2.8.1"
+    def work_version = "2.11.2"
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation "androidx.work:work-rxjava3:$work_version"
 
