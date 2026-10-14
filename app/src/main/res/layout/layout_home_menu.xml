@@ -39,7 +39,7 @@
                     android:background="@drawable/shape_oval_with_border"
                     android:backgroundTint="?themeBackgroundColor"
                     android:layout_centerInParent="true"
-                    android:padding="@dimen/marginSmall"
+                    android:padding="@dimen/marginClose"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -102,7 +102,7 @@
                     android:background="@drawable/shape_oval_with_border"
                     android:backgroundTint="?themeBackgroundColor"
                     android:layout_centerInParent="true"
-                    android:padding="@dimen/marginSmall"
+                    android:padding="@dimen/marginClose"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -164,7 +164,7 @@
                     android:background="@drawable/shape_oval_with_border"
                     android:backgroundTint="?themeBackgroundColor"
                     android:layout_centerInParent="true"
-                    android:padding="@dimen/marginSmall"
+                    android:padding="@dimen/marginClose"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
